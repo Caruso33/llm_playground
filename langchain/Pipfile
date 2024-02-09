@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+black = "*"
+langchain = "*"
+langchain_community = "*"
+langchain_core = "*"
+langchain_experimental = "*"
+langchainhub = "*"
+python-dotenv = "*"
+tavily-python = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
