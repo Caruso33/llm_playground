@@ -1,10 +1,12 @@
 from typing import List
 
 from langchain.chains import RetrievalQA
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 
 def get_qa_chain(docs: List[Document]):
@@ -17,12 +19,14 @@ def get_qa_chain(docs: List[Document]):
     splits = text_splitter.split_text(text)
 
     # Build an index
-    embeddings = OpenAIEmbeddings()
+    embeddings = HuggingFaceEmbeddings()
+    # embeddings = OpenAIEmbeddings()
+
     vectordb = FAISS.from_texts(splits, embeddings)
 
     # Build a QA chain
     chain = RetrievalQA.from_chain_type(
-        llm=ChatOpenAI(model="gpt-3.5-turbo", temperature=0),
+        llm=get_qa_chain(),
         chain_type="stuff",
         retriever=vectordb.as_retriever(),
     )

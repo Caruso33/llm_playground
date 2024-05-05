@@ -22,6 +22,8 @@ tiktoken = "*"
 transformers = "*"
 youtube-transcript-api = "*"
 yt_dlp = "*"
+sentence-transformers = "*"
+faiss-cpu = "*"
 
 [dev-packages]
 
