@@ -59,8 +59,9 @@ def get_map_chain(length, objective, return_intermediate_steps=False):
     reduce_template = """The following is set of summaries:
     {docs}
     Take these and distill it into a final, consolidated summary of the main themes.
-    Solely write the summary, no introduction or conclusion. Start directly with the summary"
+    Solely write what you are instructed, no introduction or conclusion.
     """
+    # Start directly with the summary"
     # Don't write anything else besides the summary.
     # Return a JSON object with a `summary` key.
 
@@ -69,6 +70,8 @@ def get_map_chain(length, objective, return_intermediate_steps=False):
 
     if objective is not None:
         reduce_template += f"\nPlease pay attention to also this objective, it takes preceding over everything: {objective}"
+    else:
+        reduce_template += "\nStart directly with the summary"
     # reduce_template += "\nHelpful Answer:"
 
     reduce_prompt = PromptTemplate.from_template(reduce_template)

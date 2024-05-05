@@ -1,6 +1,6 @@
 from src.docs import get_docs, get_split_docs, get_split_docs_recursively
 from src.llm import ChainType, get_chain, get_qa_chain
-from src.utils import parse_cli, print_splashscreen
+from src.utils import parse_cli, print_splashscreen, set_logger
 
 # templates based on
 # https://python.langchain.com/docs/use_cases/summarization/
@@ -8,6 +8,8 @@ from src.utils import parse_cli, print_splashscreen
 
 
 def main():
+    set_logger(ignore_warnings=True)
+
     print_splashscreen()
 
     args = parse_cli()
@@ -30,7 +32,7 @@ def main():
 
     chain = get_chain(chain_type, length, objective)
     results = chain.invoke(split_docs)
-    summary = results["output_text"]
+    summary = results["output_text"] if results["output_text"] else results
     print(f"Summary:\t\t{summary}\n")
 
     # QA
@@ -38,5 +40,5 @@ def main():
     split_text = get_split_docs_recursively(docs)
     qa_chain = get_qa_chain(split_text)
     results = qa_chain.invoke("who was doing all that?")
-    answer = results
-    print(f"Answer:\t\t{answer}\n")
+    answer = results["result"] if results["result"] else results
+    print(f"Answer:\t\t\t{answer}\n")
