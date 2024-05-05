@@ -4,15 +4,24 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-langchain-openai = "*"
-tiktoken = "*"
+beautifulsoup4 = "*"
 chromadb = "*"
 langchain = "*"
-langchainhub = "*"
-python-dotenv = "*"
-beautifulsoup4 = "*"
+langchain-community = "*"
 langchain-groq = "*"
+langchain-openai = "*"
+langchainhub = "*"
+librosa = "*"
+playwright = "*"
+pydub = "*"
+python-dotenv = "*"
+pytube = "*"
+unstructured = "*"
+torch = "*"
+tiktoken = "*"
 transformers = "*"
+youtube-transcript-api = "*"
+yt_dlp = "*"
 
 [dev-packages]
 

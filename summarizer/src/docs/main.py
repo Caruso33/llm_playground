@@ -1,12 +1,22 @@
 from typing import List
 
-from langchain_community.document_loaders import WebBaseLoader
+from langchain_community.document_loaders import TextLoader
 from langchain_core.documents import Document
 from langchain_text_splitters import CharacterTextSplitter
 
+from .weburl import load_weburl
 
-def get_docs(url) -> List[Document]:
-    loader = WebBaseLoader(url)
+
+def get_docs(url: str) -> List[Document]:
+
+    if url.startswith("http"):
+        loader = load_weburl(url)
+
+    elif url.endswith(".md"):
+        loader = TextLoader(url)
+
+    else:
+        raise ValueError(f"Unsupported URL format: {url}")
 
     docs = loader.load()
 

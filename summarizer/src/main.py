@@ -1,6 +1,7 @@
-from src.cli import parse_cli
-from src.doc import get_docs, get_split_docs
 from src.llm import ChainType, get_chain
+from src.utils import parse_cli
+from src.docs import get_docs, get_split_docs
+
 
 # templates based on
 # https://python.langchain.com/docs/use_cases/summarization/
@@ -28,9 +29,9 @@ def main():
     if url is None:
         raise ValueError("No URL provided. Please provide a URL.")
 
-    print(f"url {url}\n")
+    print(f"url\t\t{url}\n")
     if length is not None:
-        print(f"length {length} words\n")
+        print(f"length\t\t{length} words\n")
 
     chain_type = ChainType.MAP
 
@@ -46,4 +47,6 @@ def main():
 
     results = chain.invoke(docs)
 
-    print(f"results {results['output_text']}\n")
+    summary = results["output_text"]
+
+    print(f"summary {summary}\n")
